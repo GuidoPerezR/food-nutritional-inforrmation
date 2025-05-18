@@ -22,46 +22,48 @@
                 <h2>FruitTrack gives you quick access to essential fruit data.</h2>
                 <h3>Try it below!</h3>
             </header>
-            <form class="form-content">
+            <form class="form-content" id="form-content">
                 <div class="input-content">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input class="input-text" type="text" placeholder="Write a fruit">
+                    <input required class="input-text" id="input-text" type="text" placeholder="Write a fruit">
                 </div>
                 <button class="search-button" id="search-button" type="submit">Search</button>
             </form>
         </section>
-        <article class="nutrition-info-container">
-            <div class="nutrition-info">
-                <header class="nutrition-info-header">
-                    <h2>Nutrition Info</h2>
-                    <span></span>
-                    <h3>Watermelon</h3>
-                    <span></span>
-                </header>
-                <div class="nutrition-info-content">
-                    <div class="nutrition-item">
-                        <p>Calories</p>
-                        <p>1298</p>
-                    </div>
-                    <div class="nutrition-item">
-                        <p>Fat</p>
-                        <p>0.4 g</p>
-                    </div>
-                    <div class="nutrition-item">
-                        <p>Sugar</p>
-                        <p>10.3 g</p>
-                    </div>
-                    <div class="nutrition-item">
-                        <p>Carbohydrates</p>
-                        <p>10.3 g</p>
-                    </div>
-                    <div class="nutrition-item">
-                        <p>Protein</p>
-                        <p>0.3 g</p>
+        <div class="info-container" id="info-container">
+            <article class="nutrition-info-container">
+                <div class="nutrition-info">
+                    <header class="nutrition-info-header">
+                        <h2>Nutrition Info</h2>
+                        <span></span>
+                        <h3>Watermelon</h3>
+                        <span></span>
+                    </header>
+                    <div class="nutrition-info-content">
+                        <div class="nutrition-item">
+                            <p>Calories</p>
+                            <p>1298</p>
+                        </div>
+                        <div class="nutrition-item">
+                            <p>Fat</p>
+                            <p>0.4 g</p>
+                        </div>
+                        <div class="nutrition-item">
+                            <p>Sugar</p>
+                            <p>10.3 g</p>
+                        </div>
+                        <div class="nutrition-item">
+                            <p>Carbohydrates</p>
+                            <p>10.3 g</p>
+                        </div>
+                        <div class="nutrition-item">
+                            <p>Protein</p>
+                            <p>0.3 g</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </article>
+            </article>
+        </div>
     </main>
     <script src="main.js"></script>
 </body>

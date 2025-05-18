@@ -144,8 +144,12 @@ body {
   }
 }
 
-.nutrition-info-container {
+.info-container {
   display: none;
+}
+
+.nutrition-info-container {
+  display: flex;
   justify-content: center;
   align-items: center;
   padding: 4rem 2rem;
