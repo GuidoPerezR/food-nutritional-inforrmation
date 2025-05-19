@@ -11,7 +11,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -31,38 +30,13 @@
             </form>
         </section>
         <div class="info-container" id="info-container">
-            <article class="nutrition-info-container">
-                <div class="nutrition-info">
-                    <header class="nutrition-info-header">
-                        <h2>Nutrition Info</h2>
-                        <span></span>
-                        <h3>Watermelon</h3>
-                        <span></span>
-                    </header>
-                    <div class="nutrition-info-content">
-                        <div class="nutrition-item">
-                            <p>Calories</p>
-                            <p>1298</p>
-                        </div>
-                        <div class="nutrition-item">
-                            <p>Fat</p>
-                            <p>0.4 g</p>
-                        </div>
-                        <div class="nutrition-item">
-                            <p>Sugar</p>
-                            <p>10.3 g</p>
-                        </div>
-                        <div class="nutrition-item">
-                            <p>Carbohydrates</p>
-                            <p>10.3 g</p>
-                        </div>
-                        <div class="nutrition-item">
-                            <p>Protein</p>
-                            <p>0.3 g</p>
-                        </div>
-                    </div>
-                </div>
-            </article>
+            <!-- Container who's gonna contain the created element -->
+        </div>
+        <div class="loader-container" id="loader-container">
+            <span class="loader"></span>
+        </div>
+        <div class="error-message-container" id="error-message-container">
+            <!-- Container for error's message -->
         </div>
     </main>
     <script src="main.js"></script>
