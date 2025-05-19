@@ -65,6 +65,7 @@ body {
   align-items: center;
   padding: 4rem 2rem;
   gap: 4rem;
+  animation: fade-in 2s ease;
 }
 
 .fruit-track-header {
@@ -92,6 +93,7 @@ body {
     font-size: 1.5rem;
     text-align: center;
     font-weight: 600;
+    animation: bounce 500ms linear alternate infinite;
   }
 }
 
@@ -99,6 +101,12 @@ body {
   display: flex;
   flex-direction: row;
   gap: 4px;
+  animation: move-in 2s ease;
+}
+
+.input-content {
+  position: relative;
+
   & i {
     position: absolute;
     top: 50%;
@@ -107,10 +115,6 @@ body {
     scale: 1.5;
     color: var(--gray);
   }
-}
-
-.input-content {
-  position: relative;
 }
 
 .input-text {
@@ -156,6 +160,7 @@ body {
   align-items: center;
   min-height: 100dvh;
   padding: 4rem 2rem;
+  animation: fade-and-bounce 1s ease;
 }
 
 .nutrition-info-container {
@@ -237,6 +242,7 @@ body {
   align-items: center;
   min-height: 100dvh;
   padding: 4rem 2rem;
+  animation: fade-in 1.5s ease;
 }
 
 .error-message {
@@ -256,6 +262,7 @@ body {
 .error-image {
   width: 20rem;
   height: 20rem;
+  animation: error-bounce 900ms ease;
 }
 
 .loader-container {
@@ -274,6 +281,64 @@ body {
   text-indent: -9999em;
   animation: mulShdSpin 1.1s infinite ease;
   transform: translateZ(0);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(15px);
+  }
+}
+
+@keyframes move-in {
+  from {
+    opacity: 0;
+    transform: translateX(-200px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-and-bounce {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes error-bounce {
+  0% {
+    transform: translateX(8px);
+  }
+  25% {
+    transform: translateX(-8px);
+  }
+  50% {
+    transform: translateX(8px);
+  }
+  75% {
+    transform: translateX(-8px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 @keyframes mulShdSpin {
