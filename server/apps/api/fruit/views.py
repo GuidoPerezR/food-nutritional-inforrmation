@@ -10,6 +10,10 @@ def get_fruit_info(request):
     try:
         url = f"https://www.fruityvice.com/api/fruit/{fruit_name}"
         response = requests.get(url)
+        if response.status_code != 200:
+            return Response(
+                {"error": "Fruit not found or API error."}, status=response.status_code
+            )
         data = response.json()
         return Response(data)
     except Exception as e:
