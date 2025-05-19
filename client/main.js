@@ -4,6 +4,8 @@ const fruitInput = $('#input-text')
 const searchButton = $('#search-button')
 const form = $('#form-content')
 const infoContainer = $('#info-container')
+const errorContainer = $('#error-message-container')
+const loaderContainer = $('#loader-container')
 
 const createCardInfo = (data) => {
     infoContainer.innerHTML = '';
@@ -42,23 +44,58 @@ const createCardInfo = (data) => {
         </div>
     `;
     infoContainer.appendChild(article)
+
+    infoContainer.style.display = 'flex'
+}
+
+const createMessageError = () => {
+    errorContainer.innerHTML = ''
+    const errorMessage = document.createElement('div')
+    errorMessage.className = 'error-message'
+    errorMessage.innerHTML = `
+    <p class="error-text">Your fruit was not found. Try with another one!</p>
+    <img class="error-image" src="./images/814-removebg-preview.png" alt="Image of a sad apple">`
+    errorContainer.appendChild(errorMessage)
+
+    errorContainer.style.display = 'flex'
+
 }
 
 const getFruitInfo = async fruit => {
     const url = `http://localhost:8000/fruit-info/?fruit=${encodeURIComponent(fruit)}`
+
     try {
         const response = await fetch(url);
         const result = await response.json();
-        createCardInfo(result)
-        infoContainer.style.display = 'block'
+        return { status: response.ok, result }
     } catch (error) {
         //Mensaje de error
+        console.log(error)
     }
-
 }
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    infoContainer.style.display = 'none';
+    errorContainer.style.display = 'none';
+
+    searchButton.setAttribute('disabled', '')
+    searchButton.classList.add('disabled')
+
+    loaderContainer.style.display = 'flex';
+    loaderContainer.scrollIntoView()
+
+
     const fruitText = fruitInput.value
-    getFruitInfo(fruitText)
+    const fruitInfo = await getFruitInfo(fruitText)
+
+    if (fruitInfo?.status) {
+        createCardInfo(fruitInfo?.result)
+    } else {
+        createMessageError()
+    }
+
+    loaderContainer.style.display = 'none'
+    searchButton.removeAttribute('disabled', '')
+    searchButton.classList.remove('disabled')
 })
