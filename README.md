@@ -4,7 +4,7 @@ FruitTrack es una aplicacion web en donde los usuarios podran buscar la informac
 
 ### 🌐 Enlace al sitio
 
-- [https://guidoperezr.github.io/fruit-track/](https://guidoperezr.github.io/fruit-track/client/index.html)
+- [https://guidoperezr.github.io/fruit-track/](https://guidoperezr.github.io/fruit-track/client/)
 
 ## 🛠️ Tecnologías utilizadas
 
