@@ -60,7 +60,7 @@ const createMessageError = () => {
     errorMessage.className = 'error-message'
     errorMessage.innerHTML = `
     <p class="error-text">Your fruit was not found. Try with another one!</p>
-    <img class="error-image" src="./images/814-removebg-preview.png" alt="Image of a sad apple">`
+    <img class="error-image" src="./images/sad-apple.png" alt="Image of a sad apple">`
     errorContainer.appendChild(errorMessage)
 
     const div = document.createElement('div')
