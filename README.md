@@ -1,10 +1,10 @@
-# 📃 FoodTrack
+# 📃 FruitTrack
 
-FoodTrack es una aplicacion web en donde los usuarios podran buscar la informacion nutrimental de cualquier fruta, como calorias, azucar o proteina.
+FruitTrack es una aplicacion web en donde los usuarios podran buscar la informacion nutrimental de cualquier fruta, como calorias, azucar o proteina.
 
 ### 🌐 Enlace al sitio
 
-- [https://guidoperezr.github.io/food-track/](https://guidoperezr.github.io/food-track/)
+- [https://guidoperezr.github.io/fruit-track/](https://guidoperezr.github.io/fruit-track/client/index.html)
 
 ## 🛠️ Tecnologías utilizadas
 
