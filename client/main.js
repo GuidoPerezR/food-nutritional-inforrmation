@@ -6,13 +6,14 @@ const form = $('#form-content')
 const infoContainer = $('#info-container')
 const errorContainer = $('#error-message-container')
 const loaderContainer = $('#loader-container')
+const toggleButton = $('#toggle-dark');
+const body = $('#body')
 
 const createCardInfo = (data) => {
     infoContainer.innerHTML = '';
     const article = document.createElement('article');
-    article.className = 'nutrition-info-container';
+    article.className = 'nutrition-info';
     article.innerHTML = `
-        <div class="nutrition-info">
             <header class="nutrition-info-header">
                 <h2>Nutrition Info</h2>
                 <span></span>
@@ -41,9 +42,14 @@ const createCardInfo = (data) => {
                     <p>${data?.nutritions?.protein} g</p>
                 </div>
             </div>
-        </div>
     `;
     infoContainer.appendChild(article)
+
+    const div = document.createElement('div')
+    div.className = 'up-button-container'
+    div.innerHTML = `<a class="up-button" href="#fruit-track-container"><i class="fa-solid fa-arrow-up"></i></a>`
+
+    infoContainer.appendChild(div)
 
     infoContainer.style.display = 'flex'
 }
@@ -56,6 +62,12 @@ const createMessageError = () => {
     <p class="error-text">Your fruit was not found. Try with another one!</p>
     <img class="error-image" src="./images/814-removebg-preview.png" alt="Image of a sad apple">`
     errorContainer.appendChild(errorMessage)
+
+    const div = document.createElement('div')
+    div.className = 'up-button-container'
+    div.innerHTML = `<a class="up-button" href="#fruit-track-container"><i class="fa-solid fa-arrow-up"></i></a>`
+
+    errorContainer.appendChild(div)
 
     errorContainer.style.display = 'flex'
 
@@ -94,8 +106,25 @@ form.addEventListener('submit', async (e) => {
     } else {
         createMessageError()
     }
+    fruitInput.value = ''
 
     loaderContainer.style.display = 'none'
     searchButton.removeAttribute('disabled', '')
     searchButton.classList.remove('disabled')
 })
+
+
+toggleButton.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+
+    // Guardar en localStorage si tiene el dark-mode o no
+    const isDark = body.classList.contains('dark-mode');
+    localStorage.setItem('dark-mode', isDark);
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+    const isDarkMode = localStorage.getItem('dark-mode') === 'true';
+    if (isDarkMode) {
+        body.classList.add('dark-mode');
+    }
+});

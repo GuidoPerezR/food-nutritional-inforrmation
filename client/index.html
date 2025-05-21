@@ -13,9 +13,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body id="body">
     <main>
-        <section class="fruit-track-container">
+        <div class="dark-button-container">
+            <button id="toggle-dark" class="dark-mode-button"><i
+                    class="fa-solid fa-circle-half-stroke dark-mode-icon"></i></button>
+        </div>
+        <section class="fruit-track-container" id="fruit-track-container">
             <header class="fruit-track-header">
                 <h1><span>Fruit</span>Track</h1>
                 <h2>FruitTrack gives you quick access to essential fruit data.</h2>
@@ -24,7 +28,15 @@
             <form class="form-content" id="form-content">
                 <div class="input-content">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input required class="input-text" id="input-text" type="text" placeholder="Write a fruit">
+                    <input required class="input-text" id="input-text" list="fruit-suggestions" type="text"
+                        placeholder="Write a fruit">
+                    <datalist id="fruit-suggestions">
+                        <option value="Apple">
+                        <option value="Banana">
+                        <option value="Watermelon">
+                        <option value="Pineapple">
+                        <option value="Mango">
+                    </datalist>
                 </div>
                 <button class="search-button" id="search-button" type="submit">Search</button>
             </form>
