@@ -74,7 +74,7 @@ const createMessageError = () => {
 }
 
 const getFruitInfo = async fruit => {
-    const url = `http://localhost:8000/fruit-info/?fruit=${encodeURIComponent(fruit)}`
+    const url = `https://fruit-track.onrender.com/fruit-info/?fruit=${encodeURIComponent(fruit)}`
 
     try {
         const response = await fetch(url);
