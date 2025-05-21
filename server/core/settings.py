@@ -1,5 +1,7 @@
+import os
 from pathlib import Path
 
+import dj_database_url
 from corsheaders.defaults import default_headers, default_methods
 from decouple import Csv, config
 
@@ -21,18 +23,7 @@ ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 if not DEBUG:
     CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", cast=Csv())
 
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        r"^https://\w+\.exyturventas\.com$",
-    ]
-
     CORS_ALLOW_METHODS = default_methods
-
-    CORS_ALLOW_HEADERS = (
-        *default_headers,
-        "HTTP_AUTHORIZATION",
-    )
-
-    CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
 else:
     CORS_ALLOW_ALL_ORIGINS = True
     CORS_ALLOW_CREDENTIALS = True
@@ -52,6 +43,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
@@ -91,8 +83,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
@@ -128,6 +118,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
