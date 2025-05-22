@@ -7,7 +7,6 @@ from rest_framework.response import Response
 @api_view(["GET"])
 def get_fruit_info(request):
     fruit_name = request.GET.get("fruit", "")
-    print(fruit_name)
     if not fruit_name:
         return Response({"error": "Missing fruit parameter"}, status=400)
 
