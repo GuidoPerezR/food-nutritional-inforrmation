@@ -8,6 +8,9 @@ from rest_framework.response import Response
 def get_fruit_info(request):
     fruit_name = request.GET.get("fruit", "")
     print(fruit_name)
+    if not fruit_name:
+        return Response({"error": "Missing fruit parameter"}, status=400)
+
     try:
         url = f"https://www.fruityvice.com/api/fruit/{fruit_name}"
         response = requests.get(url)
