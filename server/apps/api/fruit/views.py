@@ -7,6 +7,7 @@ from rest_framework.response import Response
 @api_view(["GET"])
 def get_fruit_info(request):
     fruit_name = request.GET.get("fruit", "")
+    print(fruit_name)
     try:
         url = f"https://www.fruityvice.com/api/fruit/{fruit_name}"
         response = requests.get(url)
