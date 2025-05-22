@@ -88,14 +88,18 @@ const getFruitInfo = async fruit => {
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    fruitInput.blur(); // Hacer que se cierre el input, Caso en moviles
     infoContainer.style.display = 'none';
     errorContainer.style.display = 'none';
 
     searchButton.setAttribute('disabled', '')
     searchButton.classList.add('disabled')
 
+
     loaderContainer.style.display = 'flex';
-    loaderContainer.scrollIntoView()
+    setTimeout(() => {
+        loaderContainer.scrollIntoView();
+    }, 300);
 
 
     const fruitText = fruitInput.value
