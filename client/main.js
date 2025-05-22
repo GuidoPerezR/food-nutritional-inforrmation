@@ -79,6 +79,7 @@ const getFruitInfo = async fruit => {
     try {
         const response = await fetch(url);
         const result = await response.json();
+        console.log(result)
         return { status: response.ok, result }
     } catch (error) {
         //Mensaje de error
