@@ -1,130 +1,98 @@
-const $ = (element) => document.querySelector(element)
+const searchBtn = document.querySelector('#search-button')
+const themeBtn = document.querySelector('#toggle-dark')
+const body = document.querySelector('body');
+const contenedorInfo = document.querySelector('#info-container');
+const $templateData = document.querySelector('#info').content;
+const $templateError = document.querySelector('#error').content;
+const form = document.querySelector('#form-content');
+const loader = document.querySelector('.loader');
 
-const fruitInput = $('#input-text')
-const searchButton = $('#search-button')
-const form = $('#form-content')
-const infoContainer = $('#info-container')
-const errorContainer = $('#error-message-container')
-const loaderContainer = $('#loader-container')
-const toggleButton = $('#toggle-dark');
-const body = $('#body')
 
-const createCardInfo = (data) => {
-    infoContainer.innerHTML = '';
-    const article = document.createElement('article');
-    article.className = 'nutrition-info';
-    article.innerHTML = `
-            <header class="nutrition-info-header">
-                <h2>Nutrition Info</h2>
-                <span></span>
-                <h3>${data?.name}</h3>
-                <span></span>
-            </header>
-            <div class="nutrition-info-content">
-                <div class="nutrition-item">
-                    <p>Calories</p>
-                    <p>${data?.nutritions?.calories}</p>
-                </div>
-                <div class="nutrition-item">
-                    <p>Fat</p>
-                    <p>${data?.nutritions?.fat} g</p>
-                </div>
-                <div class="nutrition-item">
-                    <p>Sugar</p>
-                    <p>${data?.nutritions?.sugar} g</p>
-                </div>
-                <div class="nutrition-item">
-                    <p>Carbohydrates</p>
-                    <p>${data?.nutritions?.carbohydrates} g</p>
-                </div>
-                <div class="nutrition-item">
-                    <p>Protein</p>
-                    <p>${data?.nutritions?.protein} g</p>
-                </div>
-            </div>
-    `;
-    infoContainer.appendChild(article)
-
-    const div = document.createElement('div')
-    div.className = 'up-button-container'
-    div.innerHTML = `<a class="up-button" href="#fruit-track-container"><i class="fa-solid fa-arrow-up"></i></a>`
-
-    infoContainer.appendChild(div)
-
-    infoContainer.style.display = 'flex'
-}
-
-const createMessageError = () => {
-    errorContainer.innerHTML = ''
-    const errorMessage = document.createElement('div')
-    errorMessage.className = 'error-message'
-    errorMessage.innerHTML = `
-    <p class="error-text">Your fruit was not found. Try with another one!</p>
-    <img class="error-image" src="./images/sad-apple.png" alt="Image of a sad apple">`
-    errorContainer.appendChild(errorMessage)
-
-    const div = document.createElement('div')
-    div.className = 'up-button-container'
-    div.innerHTML = `<a class="up-button" href="#fruit-track-container"><i class="fa-solid fa-arrow-up"></i></a>`
-
-    errorContainer.appendChild(div)
-
-    errorContainer.style.display = 'flex'
-
-}
-
-const getFruitInfo = async fruit => {
-    const url = `http://localhost:8000/fruit-info/?fruit=${encodeURIComponent(fruit)}`
-
-    try {
-        const response = await fetch(url);
-        const result = await response.json();
-        return { status: response.ok, result }
-    } catch (error) {
-        //Mensaje de error
-        console.log(error)
-    }
-}
-
-form.addEventListener('submit', async (e) => {
+searchBtn.addEventListener('click', (e) =>{
+    
     e.preventDefault();
-    infoContainer.style.display = 'none';
-    errorContainer.style.display = 'none';
+    let inputValue = document.querySelector('#input-text').value;
 
-    searchButton.setAttribute('disabled', '')
-    searchButton.classList.add('disabled')
-
-    loaderContainer.style.display = 'flex';
-    loaderContainer.scrollIntoView()
-
-
-    const fruitText = fruitInput.value
-    const fruitInfo = await getFruitInfo(fruitText)
-
-    if (fruitInfo?.status) {
-        createCardInfo(fruitInfo?.result)
-    } else {
-        createMessageError()
-    }
-    fruitInput.value = ''
-
-    loaderContainer.style.display = 'none'
-    searchButton.removeAttribute('disabled', '')
-    searchButton.classList.remove('disabled')
+    LimpiarHtml();
+    ExtraerDatos(inputValue);
+    form.reset();
 })
 
+function cargandoLoader(){
+    const span = document.createElement('span');
+    span.classList.add("loader")
 
-toggleButton.addEventListener('click', () => {
+    contenedorInfo.appendChild(span)
+}
+
+
+async function ExtraerDatos(name){
+    
+    cargandoLoader()
+    
+    try {
+      
+        const data = await fetch(`http://localhost:3001/api/fruit?name=${encodeURIComponent(name)}`);
+
+        if (!data.ok) {           
+            // Lanza un error con el mensaje personalizado
+            throw new Error("Your fruit was not found. Try with another one!");
+        }
+        
+        const response = await data.json();
+      
+        LimpiarHtml();
+        AgregandoCard(response)
+
+    } catch (error) {
+        mensajeError(error)
+    }
+}
+
+function AgregandoCard(data){
+
+    const tempplateInfo = $templateData.cloneNode(true);
+    
+    tempplateInfo.querySelector(".nutrition-info-header h3").textContent = data.name;
+    tempplateInfo.querySelector('.calories span').textContent = data.nutritions.calories
+    tempplateInfo.querySelector('.peso span').textContent = `${data.nutritions.fat} g`
+    tempplateInfo.querySelector('.sugar span').textContent = `${data.nutritions.sugar} g`
+    tempplateInfo.querySelector('.carbohydrates span').textContent = `${data.nutritions.carbohydrates} g`
+    tempplateInfo.querySelector('.protein span').textContent = `${data.nutritions.protein} g`
+
+
+
+    contenedorInfo.appendChild(tempplateInfo);
+}
+
+function LimpiarHtml(){
+    while(contenedorInfo.firstElementChild){
+        contenedorInfo.removeChild(contenedorInfo.firstElementChild)
+    }
+}
+
+function mensajeError(error){
+    LimpiarHtml();
+    const templateError = $templateError.cloneNode(true);
+    templateError.querySelector('p').textContent = error.message;
+
+    contenedorInfo.appendChild(templateError)
+}
+
+// Agregando Theme
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const isDarkMode = localStorage.getItem('dark-mode') === 'true';
+
+    if (isDarkMode) {
+        body.classList.add('dark-mode');
+    }
+});
+
+themeBtn.addEventListener('click', () => {
     body.classList.toggle('dark-mode');
 
     // Guardar en localStorage si tiene el dark-mode o no
     const isDark = body.classList.contains('dark-mode');
     localStorage.setItem('dark-mode', isDark);
-});
-
-window.addEventListener('DOMContentLoaded', () => {
-    const isDarkMode = localStorage.getItem('dark-mode') === 'true';
-    if (isDarkMode) {
-        body.classList.add('dark-mode');
-    }
 });

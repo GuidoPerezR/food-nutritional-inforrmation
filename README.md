@@ -1,4 +1,4 @@
-# 📃 FruitTrack
+# 🍎 FruitTrack
 
 FruitTrack es una aplicacion web en donde los usuarios podran buscar la informacion nutrimental de cualquier fruta, como calorias, azucar o proteina.
 
