@@ -17,7 +17,8 @@
     <main>
         <div class="dark-button-container">
             <button id="toggle-dark" class="dark-mode-button"><i
-                    class="fa-solid fa-circle-half-stroke dark-mode-icon"></i></button>
+                    class="fa-solid fa-circle-half-stroke dark-mode-icon"></i>
+            </button>
         </div>
         <section class="fruit-track-container" id="fruit-track-container">
             <header class="fruit-track-header">
@@ -26,31 +27,60 @@
                 <h3>Try it below!</h3>
             </header>
             <form class="form-content" id="form-content">
-                <div class="input-content">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <input required class="input-text" id="input-text" list="fruit-suggestions" type="text"
-                        placeholder="Write a fruit">
-                    <datalist id="fruit-suggestions">
-                        <option value="Apple">
-                        <option value="Banana">
-                        <option value="Watermelon">
-                        <option value="Pineapple">
-                        <option value="Mango">
-                    </datalist>
-                </div>
-                <button class="search-button" id="search-button" type="submit">Search</button>
+                    <input required class="input-text" id="input-text" type="text" placeholder="Write a fruit">
+                    <button class="search-button" id="search-button" type="submit"> <i class="fa-solid fa-magnifying-glass"></i> Search</button>
             </form>
+            <div class="info-container" id="info-container">
+                <!-- Container who's gonna contain the created element -->
+            </div>
         </section>
-        <div class="info-container" id="info-container">
-            <!-- Container who's gonna contain the created element -->
-        </div>
-        <div class="loader-container" id="loader-container">
+
+
+
+        <!-- <!-- <div class="loader-container" id="loader-container">
             <span class="loader"></span>
-        </div>
-        <div class="error-message-container" id="error-message-container">
-            <!-- Container for error's message -->
-        </div>
+        </div> -->
     </main>
+
+    <template id="info">
+        <div class="nutrition-info">
+            <header class="nutrition-info-header">
+                <h2>Nutrition Info</h2>
+                <h3>Manzana</h3>
+            </header>
+            <section class="nutrition-info-content">
+                <div class="nutrition-item calories">
+                    <p>Calories</p>
+                    <span>50</span>
+                </div>
+                <div class="nutrition-item peso">
+                    <p>Fat</p>
+                    <span>40g</span>
+                </div>
+                <div class="nutrition-item sugar">
+                    <p>Sugar</p>
+                    <span>10g</span>
+                </div>
+                <div class="nutrition-item carbohydrates">
+                    <p>Carbohydrates</p>
+                    <span>20 g</span>
+                </div>
+                <div class="nutrition-item protein">
+                    <p>Protein</p>
+                    <span>10g</span>
+                </div>
+            </section>
+        </div>
+    </template>
+
+    <template id="error">
+            <div class="error-message">
+                <p class="error-text">Your fruit was not found. Try with another one!</p>
+                <img class="error-image" src="./images/sad-apple.png" alt="Image of a sad apple">
+                <a class="up-button" href="#fruit-track-container"><i class="fa-solid fa-arrow-up"></i></a>
+            </div>
+    </template>
+
     <script src="main.js"></script>
 </body>
 
